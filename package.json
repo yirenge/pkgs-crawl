@@ -1,0 +1,23 @@
+{
+  "name": "pkgs-crawl",
+  "version": "1.0.0",
+  "description": "pkgs-crawl manager.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yirenge/pkgs-crawl.git"
+  },
+  "author": "brainee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yirenge/pkgs-crawl/issues"
+  },
+  "homepage": "https://github.com/yirenge/pkgs-crawl#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1"
+  }
+}
