@@ -1,57 +1,9 @@
-const http = require('http');
 const cheerio = require('cheerio');
-
-const myconfig= require('./myconfig');
+const myconfig= require('../myconfig');
 const npmHost = myconfig.npmHost;
 
-
-function getPackageInfo(req, res){
-    console.log("req:",req.query);
-    const pkgPath = req.query.pkgpath;
-    if(!pkgPath){
-        res.send('No pkgpath sent!');
-        res.end('error');
-    }
-    else{
-        var options = {
-            hostname:npmHost,
-            port:myconfig.npmPort,
-            path:pkgPath,
-            method:'get',
-            agent:false,
-            headers:{
-                'content-type':'text/html',
-                'Access-Control-Allow-Origin':'*'
-            }
-        };
-        var pkg_request = http.request(options, function(pkg_response){
-            console.log("send package info request");
-            var chunks = [];
-            pkg_response.on('data', function(chunk){
-                chunks.push(chunk);
-            });
-            pkg_response.on('end', function(){
-                var html = chunks.join('');
-                var pkgInfo = parsePackageInfoHtml(html);
-                res.setHeader('Access-Control-Allow-Origin','*');
-                res.send(JSON.stringify(pkgInfo));
-                res.end();
-            });
-
-        });
-        pkg_request.on('error', function(e){
-            console.log("Problem with request:"+e.message);
-        });
-        pkg_request.write('/body');
-        pkg_request.end();
-
-
-    }
-
-}
-
-function parsePackageInfoHtml(html){
-    console.log("parsePackageInfoHtml------");
+function pkgParser(html){
+    console.log("[pkgParser]------");
     var $ = cheerio.load(html);
     var pkgInfo = {};
 
@@ -108,4 +60,4 @@ function parsePackageInfoHtml(html){
 
 }
 
-module.exports = getPackageInfo;
+module.exports =pkgParser;

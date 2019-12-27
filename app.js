@@ -1,6 +1,6 @@
 var express = require('express');
-var pkgListRequestHandler = require('./src/pkgList');
-var pkgInfoRequestHandler = require('./src/pkg');
+var pkgListRequestHandler = require('./src/handler/pkgList');
+var pkgInfoRequestHandler = require('./src/handler/pkg');
 
 var app = express();
 
